@@ -71,14 +71,8 @@ vector<vector<int>> GameOfLife::SimulateLife(vector<vector<int>> &board, int k){
     next_board[i].resize(board_size);
   }
 
-  next_board = board;
+  next_board = board;//  "next_board" is the board dead or new living cells get adjusted to per life cycle, next_board will be set as the current board at the end of the cycle loop
 
-
-  // for(int i = 0; i < board_size; i++){
-  //   for(int j = 0; j < board_size; j++){
-  //     next_board
-  //   }
-  // }
 
   while(l < k){
 
@@ -120,8 +114,8 @@ vector<vector<int>> GameOfLife::SimulateLife(vector<vector<int>> &board, int k){
           if(board[i] [(board_size+j-1)%board_size] == 1){// left one
             neighbour_count++;
           }
-
-          if(neighbour_count >= 4){
+            
+          if(neighbour_count >= 4){//  these three if()s below check the currently tested cells for the conways game of life rules, then killing or birthing a new cell acordingly
             if(board[i][j] == 1){
               next_board[i][j] = 0;
             }
@@ -140,7 +134,7 @@ vector<vector<int>> GameOfLife::SimulateLife(vector<vector<int>> &board, int k){
           }
 
         }
-      }
+      }// updating board by setting it to next_board, next_board now contains all the new dead/living cells
       board = next_board;
       l++; // increment "cycles"
   }
